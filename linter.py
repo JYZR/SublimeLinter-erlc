@@ -40,10 +40,14 @@ class Erlc(Linter):
         command = ['erlc', '-W']
 
         settings = self.settings
+        args = settings.get('args', [])
         dirs = settings.get('include_dirs', [])
         pa_dirs = settings.get('pa_dirs', [])
         pz_dirs = settings.get('pz_dirs', [])
         output_dir = settings.get('output_dir', ".")
+
+        for a in args:
+            command.extend([a])
 
         for d in dirs:
             command.extend(["-I", d])
